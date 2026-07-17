@@ -1,11 +1,18 @@
 {
   "$schema": "https://schema.railpack.com",
+  "provider": "python",
+  "packages": {
+    "python": "3.13"
+  },
   "steps": {
     "install": {
-      "commands": ["pip install -r requirements.txt"]
+      "commands": [
+        { "src": "requirements.txt", "dest": "requirements.txt" },
+        { "cmd": "pip install -r requirements.txt" }
+      ]
     }
   },
   "deploy": {
-    "startCommand": "python proxy.py"
+    "startCommand": "mitmdump -s proxy.py -p $PORT --set block_global=false"
   }
 }
